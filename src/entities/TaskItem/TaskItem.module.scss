@@ -1,0 +1,65 @@
+.TaskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 1px #dadae2;
+  transition: all .2s linear;
+}
+
+.TaskItemSmall {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itemSmall {
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.title {
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit,
+.delete {
+  transition: color .2s linear;
+}
+
+.edit {
+  color: #5075e3;
+
+  @include hover {
+    color: #314682;
+  }
+}
+
+.delete {
+  color: #e91e63;
+
+  @include hover {
+    color: #ff558c;
+  }
+}

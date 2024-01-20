@@ -1,0 +1,12 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  transition: all .2s linear;
+
+  &.listSmall {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    transition: all .2s linear;
+  }
+}

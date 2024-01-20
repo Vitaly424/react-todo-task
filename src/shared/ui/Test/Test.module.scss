@@ -1,0 +1,9 @@
+//@import "@/app/assets/styles/abstracts/mixins";
+
+.test {
+  color: blue;
+
+  @include hover {
+    color: red;
+  }
+}

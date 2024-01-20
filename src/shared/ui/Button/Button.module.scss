@@ -1,0 +1,18 @@
+.button[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button {
+  padding: 12px 16px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid $color-bg-tertiary;
+  transition: background .2s linear, color .2s linear;
+
+  @include hover {
+    border: 1px solid #5075e3;
+    color: #fff;
+    background-color: #5075e3;
+  }
+}

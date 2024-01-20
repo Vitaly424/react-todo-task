@@ -1,0 +1,22 @@
+.title {
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: $color-bg-tertiary;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.switcherGrid {
+  display: flex;
+  gap: 10px;
+}
+
+.small,
+.big {
+  color: #5075e3;
+}

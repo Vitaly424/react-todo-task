@@ -1,0 +1,17 @@
+.title {
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: $color-bg-tertiary;
+}
+
+.link {
+  display: block;
+  color: $color-bg-tertiary;
+  margin-bottom: 20px;
+  transition: color .2s linear;
+
+  @include hover {
+    color: darken($color-bg-tertiary, 20)
+  }
+}

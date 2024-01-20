@@ -1,0 +1,15 @@
+.Tag {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.success {
+  background-color: #4bddaf;
+  color: $color-white;
+}
+
+.danger {
+  background-color: #dad24c;
+  color: $color-white;
+}

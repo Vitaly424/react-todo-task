@@ -1,0 +1,43 @@
+// Fonts
+$font-main: 'Raleway', sans-serif;
+
+// Colors
+$color-bg-tertiary: #2f2f32;
+$color-white: #fff;
+
+// Media
+$tablet: 959px;
+
+
+
+@mixin media-query($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin font-face($font-family, $url, $weight, $style) {
+  @font-face {
+    font-family: "#{$font-family}";
+    font-style: $style;
+    font-weight: #{$weight};
+    src: url("../fonts/#{$url}.woff2") format("woff2");
+    font-display: swap;
+  }
+}
+
+@mixin hover() {
+  @media screen and (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin focus() {
+  @media screen and (hover: hover) {
+    &:focus {
+      @content;
+    }
+  }
+}
