@@ -2,6 +2,7 @@
 
 ```
 npm install - устанавливаем зависимости
+npm run start:dev - запуск frontend проекта в dev режиме
 ```
 
 ----
