@@ -1,4 +1,10 @@
-export type TaskStatus = 'completed' | 'in-progress';
+export type TaskLabel = 'Завершена' | 'В процессе' | 'Все';
+export type TaskStatus = 'completed' | 'in-progress' | 'all';
+
+export interface StatusSelectOption {
+    value: TaskStatus;
+    label: TaskLabel;
+}
 
 export interface Task {
     id: string;

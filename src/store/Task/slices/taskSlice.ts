@@ -39,6 +39,14 @@ export const taskSlice = createSlice({
                 return item;
             });
         },
+        deleteTaskItem: (state, action: PayloadAction<{ id: string }>) => {
+            state.data = state.data.filter(
+                (item) => item.id !== action.payload.id,
+            );
+        },
+        filtersTask: (state, action: PayloadAction<Task[]>) => {
+            state.data = action.payload;
+        },
     },
 });
 

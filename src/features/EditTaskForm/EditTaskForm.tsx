@@ -7,7 +7,9 @@ import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { getTaskSelectors } from '@/store/Task/selectors';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { StatusTaskSelect } from '@/entities/StatusTaskSelect/StatusTaskSelect.tsx';
+import { StatusSelectOption } from '@/store/Task/types/taskSchema.ts';
 
 interface FormValues {
     title: string;
@@ -21,7 +23,11 @@ interface EditTaskFormProps {
 export const EditTaskForm = (props: EditTaskFormProps) => {
     const { id } = props;
     const taskList = useSelector(getTaskSelectors.data);
+
     const dispatch = useAppDispatch();
+    const itemTask = taskList.find((item) => item.id === id);
+
+    const [selectValue, setSelectValue] = useState<StatusSelectOption | null>();
 
     const {
         register,
@@ -33,23 +39,26 @@ export const EditTaskForm = (props: EditTaskFormProps) => {
     });
 
     useEffect(() => {
-        const itemTask = taskList.find((item) => item.id === id);
-
         if (itemTask) {
             setValue('title', itemTask.title);
             setValue('description', itemTask.description);
         }
     }, [id, setValue, taskList]);
 
-    const onSubmit = handleSubmit((data) => {
-        console.log('data', data);
+    if (!itemTask) {
+        return <h1>Ошибка</h1>;
+    }
 
+    const onSubmit = handleSubmit((data) => {
         dispatch(
             taskActions.updateTask({
                 id: id,
                 title: data.title,
                 description: data.description,
-                status: 'in-progress',
+                status:
+                    selectValue?.value !== itemTask.status && selectValue
+                        ? selectValue?.value
+                        : itemTask.status,
             }),
         );
 
@@ -65,6 +74,10 @@ export const EditTaskForm = (props: EditTaskFormProps) => {
             type: 'success',
         });
     });
+
+    const onChangeStatus = (data: StatusSelectOption) => {
+        setSelectValue(data);
+    };
 
     return (
         <form className={cls.form} onSubmit={onSubmit}>
@@ -101,6 +114,11 @@ export const EditTaskForm = (props: EditTaskFormProps) => {
                     <span className={cls.error}>Поле не может быть пустым</span>
                 )}
             </div>
+
+            <StatusTaskSelect
+                defaultValue={itemTask.status}
+                onChangeStatus={onChangeStatus}
+            />
 
             <Button type={'submit'} className={cls.btn}>
                 Сохранить

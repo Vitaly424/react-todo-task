@@ -4,6 +4,7 @@ import { CiGrid2H } from 'react-icons/ci';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { TaskList } from '@/entities/TaskList/TaskList.tsx';
+import { FilteredTask } from '@/features/FilteredTask/FilteredTask.tsx';
 
 const MainPage = () => {
     const [isView, setIsView] = useState(false);
@@ -33,6 +34,7 @@ const MainPage = () => {
                 </div>
             </div>
 
+            <FilteredTask />
             <TaskList isView={isView} />
         </>
     );

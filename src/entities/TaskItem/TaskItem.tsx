@@ -7,6 +7,8 @@ import { mapTaskStatus } from '@/shared/const/TaskStatus.ts';
 import { Tag } from '@/shared/ui/Tag/Tag.tsx';
 import { useNavigate } from 'react-router-dom';
 import { formatToRussianDate } from '@/shared/utils/formattedDate.ts';
+import { useAppDispatch } from '@/store/store.ts';
+import { taskActions } from '@/store/Task/slices/taskSlice.ts';
 
 interface TaskItemProps {
     task: Task;
@@ -15,6 +17,7 @@ interface TaskItemProps {
 
 export const TaskItem = (props: TaskItemProps) => {
     const { task, isView } = props;
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const taskStatus = mapTaskStatus[task.status];
@@ -22,6 +25,10 @@ export const TaskItem = (props: TaskItemProps) => {
     const nextEditPage = () => {
         navigate(`/task/${task.id}/edit`);
     };
+
+    const onDeleteTaskItem = () => {
+        dispatch(taskActions.deleteTaskItem({id: task.id}))
+    }
 
     return (
         <div
@@ -67,7 +74,7 @@ export const TaskItem = (props: TaskItemProps) => {
                 })}
             >
                 <div className={cls.actions}>
-                    <button>
+                    <button onClick={onDeleteTaskItem}>
                         <MdDelete
                             className={classNames(cls.delete)}
                             size={30}
