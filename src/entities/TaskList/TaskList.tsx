@@ -12,6 +12,10 @@ export const TaskList = (props: TaskListProps) => {
     const { isView } = props;
     const filteringData = useSelector(getTaskSelectors.filteringData);
 
+    if (!filteringData.length) {
+        return <h1>Задач не найдено</h1>;
+    }
+
     return (
         <div
             className={classNames(cls.list, {

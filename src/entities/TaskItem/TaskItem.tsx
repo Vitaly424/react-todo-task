@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { formatToRussianDate } from '@/shared/utils/formattedDate.ts';
 import { useAppDispatch } from '@/store/store.ts';
 import { taskActions } from '@/store/Task/slices/taskSlice.ts';
+import React from 'react';
 
 interface TaskItemProps {
     task: Task;
@@ -22,16 +23,19 @@ export const TaskItem = (props: TaskItemProps) => {
 
     const taskStatus = mapTaskStatus[task.status];
 
-    const nextEditPage = () => {
+    const nextEditPage = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         navigate(`/task/${task.id}/edit`);
     };
 
-    const onDeleteTaskItem = () => {
-        dispatch(taskActions.deleteTaskItem({id: task.id}))
-    }
+    const onDeleteTaskItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        dispatch(taskActions.deleteTaskItem({ id: task.id }));
+    };
 
     return (
         <div
+            onClick={() => navigate(`/task/${task.id}`)}
             className={classNames(cls.TaskItem, {
                 [cls.TaskItemSmall]: isView,
             })}

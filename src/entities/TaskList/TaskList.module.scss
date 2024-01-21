@@ -8,5 +8,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
     transition: all .2s linear;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 }

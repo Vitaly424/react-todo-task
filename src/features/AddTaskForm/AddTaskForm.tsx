@@ -6,6 +6,7 @@ import uuid from 'react-uuid';
 import { toast, ToastContainer } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
+import { Task } from '@/store/Task/types/taskSchema.ts';
 
 interface FormValues {
     title: string;
@@ -25,15 +26,15 @@ export const AddTaskForm = () => {
     const dispatch = useAppDispatch();
 
     const onSubmit = handleSubmit((data) => {
-        dispatch(
-            taskActions.addTask({
-                id: uuid(),
-                title: data.title,
-                description: data.description,
-                status: 'in-progress',
-                date: new Date(),
-            }),
-        );
+        const newTask: Task = {
+            id: uuid(),
+            title: data.title,
+            description: data.description,
+            status: 'in-progress',
+            date: new Date(),
+        };
+
+        dispatch(taskActions.addTask(newTask));
 
         toast('Новая задача добавлена', {
             position: 'bottom-right',

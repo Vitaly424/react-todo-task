@@ -1,0 +1,35 @@
+.TaskDetialsPage {
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px 5px #dadae2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.status {
+  max-width: 100px;
+  width: 100%;
+}
+
+.link {
+  display: block;
+  color: $color-bg-tertiary;
+  margin-bottom: 20px;
+  transition: color .2s linear;
+
+  @include hover {
+    color: darken($color-bg-tertiary, 20)
+  }
+}
+

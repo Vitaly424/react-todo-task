@@ -4,6 +4,7 @@ import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { AddTaskPage } from '@/pages/AddTaskPage';
 import { EditTaskPage } from '@/pages/EditTaskPage';
+import { TaskDetialsPage } from '@/pages/TaskDetialsPage/TaskDetialsPage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: '/task/:id/edit',
                 element: <EditTaskPage />,
+            },
+            {
+                path: '/task/:id',
+                element: <TaskDetialsPage />,
             },
         ],
     },

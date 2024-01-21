@@ -43,24 +43,24 @@ export const EditTaskForm = (props: EditTaskFormProps) => {
             setValue('title', itemTask.title);
             setValue('description', itemTask.description);
         }
-    }, [id, setValue, taskList]);
+    }, [id, itemTask, setValue, taskList]);
 
     if (!itemTask) {
         return <h1>Ошибка</h1>;
     }
 
     const onSubmit = handleSubmit((data) => {
-        dispatch(
-            taskActions.updateTask({
-                id: id,
-                title: data.title,
-                description: data.description,
-                status:
-                    selectValue?.value !== itemTask.status && selectValue
-                        ? selectValue?.value
-                        : itemTask.status,
-            }),
-        );
+        const editData = {
+            id: id,
+            title: data.title,
+            description: data.description,
+            status:
+                selectValue?.value !== itemTask.status && selectValue
+                    ? selectValue?.value
+                    : itemTask.status,
+        };
+
+        dispatch(taskActions.updateTask(editData));
 
         toast('Сохранено', {
             position: 'bottom-right',
