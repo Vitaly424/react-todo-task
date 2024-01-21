@@ -1,25 +1,50 @@
-import { StatusSelectOption } from '@/store/Task/types/taskSchema.ts';
+import {
+    StatusSelectOption,
+    TaskStatus,
+} from '@/store/Task/types/taskSchema.ts';
 import { FilterTaskSelect } from '@/entities/FilterTaskSelect/FilterTaskSelect.tsx';
 import cls from './FilteredTask.module.scss';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/store/store.ts';
 import { useSelector } from 'react-redux';
 import { getTaskSelectors } from '@/store/Task/selectors';
+import { taskActions } from '@/store/Task/slices/taskSlice.ts';
 
 export const FilteredTask = () => {
     const [search, setSearch] = useState('');
     const dispatch = useAppDispatch();
+    const [selectStatus, setSelectStatus] = useState<TaskStatus>('all');
     const tasks = useSelector(getTaskSelectors.data);
 
     const onChangeStatus = (data: StatusSelectOption) => {
-        console.log('onChangeStatus', data);
+        setSelectStatus(data.value);
     };
 
     useEffect(() => {
-        console.log('tasks', tasks);
-        // if (search) {
-        // }
-    }, [search]);
+        let filteredTasks = tasks;
+
+        if (search) {
+            filteredTasks = filteredTasks.filter((item) =>
+                item.title
+                    .toLowerCase()
+                    .trim()
+                    .includes(search.toLowerCase().trim()),
+            );
+        }
+
+        if (selectStatus !== 'all') {
+            filteredTasks = filteredTasks.filter(
+                (item) => item.status === selectStatus,
+            );
+        }
+
+        if (!search && selectStatus === 'all') {
+            dispatch(taskActions.filtersTask(tasks));
+            return;
+        }
+
+        dispatch(taskActions.filtersTask(filteredTasks));
+    }, [dispatch, search, selectStatus, tasks]);
 
     return (
         <div className={cls.FilteredTask}>
@@ -32,7 +57,7 @@ export const FilteredTask = () => {
 
             <FilterTaskSelect
                 onChangeStatus={onChangeStatus}
-                defaultValue={'all'}
+                defaultValue={selectStatus}
             />
         </div>
     );

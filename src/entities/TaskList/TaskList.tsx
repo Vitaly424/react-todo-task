@@ -10,7 +10,7 @@ interface TaskListProps {
 
 export const TaskList = (props: TaskListProps) => {
     const { isView } = props;
-    const data = useSelector(getTaskSelectors.data);
+    const filteringData = useSelector(getTaskSelectors.filteringData);
 
     return (
         <div
@@ -18,7 +18,7 @@ export const TaskList = (props: TaskListProps) => {
                 [cls.listSmall]: isView,
             })}
         >
-            {data.map((item) => (
+            {filteringData.map((item) => (
                 <TaskItem key={item.id} isView={isView} task={item} />
             ))}
         </div>

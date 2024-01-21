@@ -16,4 +16,5 @@ export interface Task {
 
 export interface TaskSchema {
     data: Task[];
+    filteringData: Task[];
 }
